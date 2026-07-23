@@ -1,4 +1,4 @@
-import ROIHistory from "../models/roiHistory.js";
+import ROIHistory from "../models/roiHistory.model.js";
 
 class ROIHistoryRepository {
   async createROIHistory(roiData, session = null) {
