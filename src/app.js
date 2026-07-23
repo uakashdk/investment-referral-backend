@@ -5,6 +5,7 @@ import authRoutes from "./routes/auth.routes.js";
 import investmentRoutes from "./routes/investment.routes.js";
 import referralRoutes from "./routes/referal.routes.js";
 import roiRoutes from "./routes/roi.routes.js";
+import dashboardRoutes from "./routes/dashboard.routes.js";
 const app = express();
 
 /**
@@ -30,7 +31,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/investments", investmentRoutes);
-// app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1/referrals", referralRoutes);
 app.use("/api/v1/roi-history", roiRoutes);
 
