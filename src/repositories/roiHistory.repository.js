@@ -14,6 +14,21 @@ class ROIHistoryRepository {
     });
   }
 
+async findByInvestmentAndDate(investmentId, date) {
+  return await ROIHistory.findOne({
+    investment: investmentId,
+    date: {
+      $gte: new Date(
+        new Date(date).setHours(0, 0, 0, 0)
+      ),
+      $lt: new Date(
+        new Date(date).setHours(23, 59, 59, 999)
+      ),
+    },
+  });
+}
+
+
   async findById(roiId) {
     return await ROIHistory.findById(roiId)
       .populate("user")

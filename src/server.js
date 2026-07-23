@@ -2,6 +2,7 @@ import app from "./app.js";
 import env from "./config/env.js";
 import connectDB from "./config/database.js";
 import mongoose from "mongoose";
+import startCronJobs from "./cron/index.js";
 
 let server = null;
 
@@ -16,6 +17,8 @@ const startServer = async () => {
     server = app.listen(env.port, () => {
       console.log(` Server running on port ${env.port}`);
     });
+
+    startCronJobs();
   } catch (error) {
     console.error(" Failed to start server");
     console.error(error.message);
