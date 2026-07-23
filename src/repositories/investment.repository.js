@@ -19,7 +19,7 @@ class InvestmentRepository {
 
   async findActiveInvestments() {
     return await Investment.find({
-      status: "ACTIVE",
+      investmentStatus: "ACTIVE",
     }).populate("user");
   }
 
