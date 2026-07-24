@@ -1,24 +1,22 @@
-# Investment Management System API
+# Investment Referral Management System
 
-A RESTful backend application built with **Node.js**, **Express.js**, and **MongoDB** for managing users, investments, ROI generation, referral income, and dashboards.
+A backend REST API developed using **Node.js**, **Express.js**, and **MongoDB** for managing Investments, ROI Distribution, Referral Income, and Dashboard statistics.
 
 ---
 
 # Features
 
-- JWT Authentication
-- User Registration & Login
+- User Authentication (JWT)
+- Register & Login
 - Investment Management
-- Daily ROI Calculation
 - ROI History
-- Referral Income System
+- Referral Income
 - Dashboard API
-- Background Cron Jobs
-- MongoDB Transactions
-- Repository Pattern Architecture
-- Error Handling
+- Daily Automatic ROI Distribution
+- Referral Income Distribution
+- Repository Pattern
 - Docker Support
-- Postman Collection Included
+- MongoDB Transactions
 
 ---
 
@@ -36,23 +34,103 @@ A RESTful backend application built with **Node.js**, **Express.js**, and **Mong
 
 ---
 
-# Project Structure
+# Folder Structure
 
 ```
-src
+backend
 │
-├── config
-├── controller
-├── cron
-├── middleware
-├── models
-├── repositories
-├── routes
-├── service
-├── utils
-├── app.js
-└── server.js
+├── src
+│   ├── config
+│   ├── controller
+│   ├── cron
+│   ├── middleware
+│   ├── models
+│   ├── repositories
+│   ├── routes
+│   ├── service
+│   ├── test
+│   ├── utils
+│   ├── validator
+│   ├── app.js
+│   └── server.js
+│
+├── .env
+├── docker-compose.yml
+├── Dockerfile
+├── package.json
+└── README.md
 ```
+
+---
+
+# Modules
+
+## Authentication
+
+- User Registration
+- User Login
+- JWT Authentication
+- Protected Routes
+
+---
+
+## Investment
+
+- Create Investment
+- Get Investment Details
+- Get User Investments
+- Get Active Investments
+- Cancel Investment
+
+---
+
+## ROI History
+
+- Get ROI History
+- Get ROI By Investment
+- Get Total ROI
+- Get Pending ROI
+- Get All ROI Records
+
+---
+
+## Referral Income
+
+- Referral Income History
+- Total Referral Income
+- Referral Details
+
+---
+
+## Dashboard
+
+Dashboard API returns
+
+- Wallet Balance
+- Total Investment
+- Total ROI Earned
+- Total Referral Income
+- Active Investments
+- Recent ROI History
+- Recent Referral History
+
+---
+
+# Background Jobs
+
+## Daily ROI Distribution
+
+Automatically runs every day at **12:00 AM**
+
+Tasks
+
+- Fetch Active Investments
+- Calculate Daily ROI
+- Create ROI History
+- Update User Wallet
+- Update Total ROI Earned
+- Prevent Duplicate ROI
+- Generate Referral Income
 
 ---
 
@@ -64,13 +142,13 @@ Clone the repository
 git clone <repository-url>
 ```
 
-Go inside project
+Move inside project
 
 ```bash
-cd investment-backend
+cd backend
 ```
 
-Install dependencies
+Install packages
 
 ```bash
 npm install
@@ -85,15 +163,15 @@ Create a `.env` file.
 ```env
 PORT=5000
 
-MONGODB_URI=your_mongodb_connection
+MONGO_URI=your_mongodb_uri
 
 JWT_ACCESS_SECRET=your_access_secret
 
 JWT_REFRESH_SECRET=your_refresh_secret
 
-JWT_ACCESS_EXPIRE=1d
+JWT_ACCESS_EXPIRES=1d
 
-JWT_REFRESH_EXPIRE=7d
+JWT_REFRESH_EXPIRES=7d
 ```
 
 ---
@@ -114,101 +192,9 @@ npm start
 
 ---
 
-# API Modules
-
-## Authentication
-
-- Register User
-- Login User
-- Get Logged-in User
-
----
-
-## Investment
-
-- Create Investment
-- Get Investment By ID
-- Get User Investments
-- Get Active Investments
-- Cancel Investment
-- Complete Investment
-
----
-
-## ROI History
-
-- Get ROI By ID
-- Get Logged User ROI History
-- Get Investment ROI History
-- Get Pending ROI
-- Get Total ROI
-- Get All ROI History
-
----
-
-## Referral Income
-
-- Get Referral By ID
-- Get Referral History
-- Get Total Referral Income
-- Get All Referral Income
-- Delete Referral Record
-
----
-
-## Dashboard
-
-Dashboard API returns
-
-- Total Wallet Balance
-- Total Investment
-- Total ROI Earned
-- Total Referral Income
-- Active Investments
-- Recent ROI History
-- Recent Referral Income
-
----
-
-# Background Jobs
-
-The application includes automated cron jobs.
-
-## Daily ROI Distribution
-
-Runs every day at **12:00 AM**
-
-Responsibilities
-
-- Fetch Active Investments
-- Calculate Daily ROI
-- Credit User Wallet
-- Update Total ROI Earned
-- Create ROI History
-- Prevent Duplicate ROI Generation
-- Credit Referral Income (Level 1)
-
----
-
-# Security
-
-- JWT Authentication
-- Password Hashing (bcrypt)
-- Protected APIs
-- Input Validation
-- Centralized Error Handling
-
----
-
-# Testing
-
-The project includes a complete Postman Collection for testing every API.
-
----
-
 # Docker
 
-Run using Docker
+Build Docker Image
 
 ```bash
 docker-compose up --build
@@ -216,10 +202,64 @@ docker-compose up --build
 
 ---
 
+# API Testing
+
+The complete API collection is available in the attached Postman Collection.
+
+Import the collection into Postman and configure the environment variables before testing.
+
+---
+
+# Authentication
+
+All protected APIs require a JWT Access Token.
+
+Example Header
+
+```
+Authorization: Bearer <access_token>
+```
+
+---
+
+# Cron Job
+
+The application uses **node-cron** for scheduled tasks.
+
+Current Scheduled Jobs
+
+- Daily ROI Distribution
+- Referral Income Distribution
+
+---
+
+# Architecture
+
+The project follows the Repository Pattern.
+
+```
+Routes
+      │
+Controller
+      │
+Service
+      │
+Repository
+      │
+MongoDB
+```
+
+---
+
 # Author
 
-Akash Kumar Dubey
+**Akash Kumar Dubey**
 
-Backend Developer
+Full Stack Developer
 
-Node.js • Express.js • MongoDB
+- Node.js
+- Express.js
+- MongoDB
+- Docker
+- JWT Authentication
+- Repository Pattern
